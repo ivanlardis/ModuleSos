@@ -3,6 +3,7 @@ package com.lardis.i_larin.module.ui.activity.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.lardis.i_larin.module.R
@@ -12,8 +13,23 @@ import com.lardis.i_larin.module.ui.activity.navigation.NavigationActivity
 import kotlinx.android.synthetic.main.login_activity.*
 
 
-
 class LoginActivity : MvpAppCompatActivity(), LoginView {
+    override fun showProgress(boolean: Boolean) {
+        if (boolean) {
+            login_activity_button.showProgress()
+        } else login_activity_button.hideProgress()
+
+    }
+
+    override fun showWarning() {
+        Toast.makeText(this, "Неправильный пароль", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showOK() {
+
+        startNavigationActivity()
+    }
+
     val EMAIL = "EMAIL"
     val PASSWORD = "PASSWORD"
 
@@ -30,7 +46,10 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
-        login_activity_button.setOnClickListener { startNavigationActivity() }
+        login_activity_button.setOnClickListener {
+            mLoginPresenter.checkUser(login_activity_edit_text_email.text.toString(),
+                    login_activity_edit_text_password.text.toString())
+        }
 
     }
 

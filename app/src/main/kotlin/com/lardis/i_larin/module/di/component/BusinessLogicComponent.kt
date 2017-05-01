@@ -1,6 +1,7 @@
 package com.example.i_larin.pixabayreader.di.component
 
 import com.example.i_larin.pixabayreader.di.model.BusinessLogicModule
+import com.lardis.i_larin.module.presentation.presenter.login.LoginPresenter
 import com.lardis.i_larin.module.presentation.presenter.setting.DialogPresenter
 import dagger.Subcomponent
 import javax.inject.Singleton
@@ -14,4 +15,5 @@ import javax.inject.Singleton
 interface BusinessLogicComponent {
 
     fun inject(entry: DialogPresenter)
+    fun inject(entry: LoginPresenter)
 }

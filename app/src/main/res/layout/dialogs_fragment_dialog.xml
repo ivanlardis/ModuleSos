@@ -23,10 +23,10 @@
         <EditText
             android:id="@+id/dialogs_fragment_dialog_edit_text_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="140dp"
-            android:hint="Введите название"
+            android:hint="Введите  "
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorAccent" />
 
@@ -49,10 +49,11 @@
         <EditText
             android:id="@+id/dialogs_fragment_dialog_edit_text_description"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="140dp"
-            android:hint="Введите Описание"
+
+            android:hint="Введите"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorAccent" />
 
