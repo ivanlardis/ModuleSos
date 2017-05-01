@@ -1,4 +1,4 @@
-package com.lardis.i_larin.module.ui.fragment.setting
+package com.lardis.i_larin.module.ui.fragment.about
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +11,14 @@ import com.lardis.i_larin.module.presentation.presenter.setting.SettingPresenter
 import com.lardis.i_larin.module.presentation.view.setting.SettingView
 
 
-class DialogsFragment : MvpAppCompatFragment(), SettingView {
+class AboutFragment : MvpAppCompatFragment(), SettingView {
 
     @InjectPresenter
      lateinit var mSettingPresenter: SettingPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.dialogs_fragment, container, false)
+        return inflater?.inflate(R.layout.about_fragment, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -31,8 +31,8 @@ class DialogsFragment : MvpAppCompatFragment(), SettingView {
         val TAG = "SettingFragment"
 
 
-        fun newInstance(): DialogsFragment {
-            val fragment = DialogsFragment()
+        fun newInstance(): AboutFragment {
+            val fragment = AboutFragment()
 
             val args = Bundle()
             fragment.arguments = args

@@ -1,10 +1,12 @@
 package com.lardis.i_larin.module
 
 import android.app.Application
+import com.example.i_larin.pixabayreader.di.DI
+import com.facebook.stetho.Stetho
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
-
+import timber.log.Timber
 
 
 /**
@@ -21,6 +23,16 @@ companion object
 
     override fun onCreate() {
         super.onCreate()
+
+
+        DI.init(applicationContext)
+
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+            Timber.plant(Timber.DebugTree())
+        }
+
+
         INSTANCE = this
         cicerone = Cicerone.create()
     }

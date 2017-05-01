@@ -1,4 +1,4 @@
-package com.lardis.i_larin.module.ui.fragment.setting
+package com.lardis.i_larin.module.ui.fragment.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,23 +7,23 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.lardis.i_larin.module.R
-import com.lardis.i_larin.module.presentation.presenter.setting.SettingPresenter
+import com.lardis.i_larin.module.presentation.presenter.setting.DialogPresenter
 import com.lardis.i_larin.module.presentation.view.setting.SettingView
 
 
-class AboutFragment : MvpAppCompatFragment(), SettingView {
+class DialogsFragment : MvpAppCompatFragment(), SettingView {
 
     @InjectPresenter
-     lateinit var mSettingPresenter: SettingPresenter
+     lateinit var mDialogPresenter: DialogPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.about_fragment, container, false)
+        return inflater?.inflate(R.layout.dialogs_fragment, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        mDialogPresenter.loadData()
     }
 
     companion object {
@@ -31,8 +31,8 @@ class AboutFragment : MvpAppCompatFragment(), SettingView {
         val TAG = "SettingFragment"
 
 
-        fun newInstance(): AboutFragment {
-            val fragment = AboutFragment()
+        fun newInstance(): DialogsFragment {
+            val fragment = DialogsFragment()
 
             val args = Bundle()
             fragment.arguments = args

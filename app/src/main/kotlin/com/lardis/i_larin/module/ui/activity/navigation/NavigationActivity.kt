@@ -17,8 +17,8 @@ import com.lardis.i_larin.module.App
 import com.lardis.i_larin.module.R
 import com.lardis.i_larin.module.presentation.presenter.navigation.NavigationPresenter
 import com.lardis.i_larin.module.presentation.view.navigation.NavigationsView
-import com.lardis.i_larin.module.ui.fragment.setting.AboutFragment
-import com.lardis.i_larin.module.ui.fragment.setting.DialogsFragment
+import com.lardis.i_larin.module.ui.fragment.about.AboutFragment
+import com.lardis.i_larin.module.ui.fragment.dialogs.DialogsFragment
 import com.lardis.i_larin.module.ui.fragment.setting.SettingFragment
 import kotlinx.android.synthetic.main.navigation_activity.*
 import kotlinx.android.synthetic.main.navigation_activity_layout_content.*
