@@ -11,6 +11,16 @@ class GroopAdapter () : RecyclerView.Adapter<GroopAdapter.ViewHolder>() {
     var adapterDataObserver: AdapterDataObserver
 
     var headerItems: ArrayList<ItemView<*>> = ArrayList()
+
+    fun clearHeader( )
+
+    {
+        headerItems.clear()
+
+
+
+
+    }
     var footerItems: ArrayList<ItemView<*>> = ArrayList()
 
     private var data: HashMap<GroupTitleItemView<*>, ItemAdapter> = HashMap()

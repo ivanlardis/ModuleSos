@@ -13,7 +13,8 @@
         android:id="@+id/messages_fragment_item_text_view_time_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="bottom|right"
+
         android:layout_marginLeft="16dp"
         android:layout_marginTop="2dp"
 
@@ -23,13 +24,14 @@
         android:id="@+id/messages_fragment_item_text_view_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="2dp"
 
         android:text="RU-EN" />
 
     <TextView
+        android:visibility="gone"
 android:id="@+id/messages_fragment_item_text_view_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

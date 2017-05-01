@@ -18,7 +18,7 @@ import com.lardis.i_larin.module.presentation.view.navigation.TooggleView
 import com.lardis.i_larin.module.presentation.view.setting.DialogView
 import com.lardis.i_larin.module.storage.entities.DialogModel
 import com.lardis.i_larin.module.storage.entities.MessageModel
-import kotlinx.android.synthetic.main.dialogs_fragment.*
+import kotlinx.android.synthetic.main.messages_fragment.*
 import timber.log.Timber
 
 
@@ -27,8 +27,9 @@ class MessagesFragment : MvpAppCompatFragment(), DialogView {
 
         with(groopAdapter)
         {
-            clearData()
+            clearHeader()
             headerItems.addAll(dialogModels.map { MessagesItemView(it) })
+            notifyDataSetChanged()
         }
     }
 
@@ -45,12 +46,17 @@ class MessagesFragment : MvpAppCompatFragment(), DialogView {
 
     lateinit var groopAdapter: GroopAdapter
 
-    private fun configureRecyclerView() = with(dialogs_fragment_recycler)
-    {
-        groopAdapter = GroopAdapter()
-        setLayoutManager(LinearLayoutManager(activity.applicationContext))
-        addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-        setAdapter(groopAdapter)
+    private fun configureRecyclerView() {
+        var linearLayoutManager = LinearLayoutManager(activity.applicationContext)
+        with(messages_fragment_recycler)
+        {
+            groopAdapter = GroopAdapter()
+
+            linearLayoutManager.setReverseLayout(true)
+            setLayoutManager(linearLayoutManager)
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+            setAdapter(groopAdapter)
+        }
     }
 
     @InjectPresenter(type = PresenterType.GLOBAL)
@@ -58,7 +64,7 @@ class MessagesFragment : MvpAppCompatFragment(), DialogView {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.dialogs_fragment, container, false)
+            inflater?.inflate(R.layout.messages_fragment, container, false)
 
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -66,9 +72,17 @@ class MessagesFragment : MvpAppCompatFragment(), DialogView {
         configureRecyclerView()
 
         setTitleActionBar("Сообщения")
-        mDialogPresenter.loadData()
+        initView()
     }
+fun initView()
+{
 
+
+    messages_fragment_message_send.callback={mDialogPresenter.saveMessage(it)}
+
+
+
+}
     override fun onResume() {
         super.onResume()
         Timber.e("onResume")

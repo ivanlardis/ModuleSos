@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_gravity="center"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:text="Название беседы"
+            android:textColor="@color/colorPrimary" />
+
+        <EditText
+            android:id="@+id/dialogs_fragment_dialog_edit_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="140dp"
+            android:hint="Введите название"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorAccent" />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:text="Описание"
+            android:textColor="@color/colorPrimary" />
+
+        <EditText
+            android:id="@+id/dialogs_fragment_dialog_edit_text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="140dp"
+            android:hint="Введите Описание"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorAccent" />
+
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/dialogs_fragment_dialog_button_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Добавить беседу" />
+
+
+</LinearLayout>

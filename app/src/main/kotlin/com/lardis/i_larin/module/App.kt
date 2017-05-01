@@ -3,6 +3,7 @@ package com.lardis.i_larin.module
 import android.app.Application
 import com.example.i_larin.pixabayreader.di.DI
 import com.facebook.stetho.Stetho
+import com.lardis.i_larin.module.prefs.PrefsRX
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -23,7 +24,7 @@ companion object
 
     override fun onCreate() {
         super.onCreate()
-
+        PrefsRX.getInstance().init(this)
 
         DI.init(applicationContext)
 

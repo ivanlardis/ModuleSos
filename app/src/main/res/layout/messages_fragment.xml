@@ -1,10 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.setting.SettingFragment">
-    <android.support.v7.widget.RecyclerView
-   android:id="@+id/dialogs_fragment_recycler"
+
+    <com.lardis.i_larin.module.ui.widget.ui.MessageSendView
+        android:id="@+id/messages_fragment_message_send"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/messages_fragment_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/messages_fragment_message_send"
+        android:background="@color/colorPrimaryDark" />
+
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.i_larin.pixabayreader.repository
 
+import com.lardis.i_larin.module.prefs.Prefs
 import com.lardis.i_larin.module.storage.entities.DialogModel
 import com.lardis.i_larin.module.storage.entities.MessageModel
 import com.lardis.i_larin.module.storage.tables.DialogTable
@@ -10,14 +11,68 @@ import rx.Observable
 import rx.schedulers.Schedulers
 import rx.subjects.BehaviorSubject
 import timber.log.Timber
-import java.util.*
-
-
 
 
 class DialogRepository : IDialogRepository {
-    override fun selectedDialog(id: Long) {
+    override fun saveMessage(message: String) {
 
+        selectedDialod?.let {
+            var messageModel = MessageModel(null, message, Prefs.USER_ID.long, it,
+                    System.currentTimeMillis())
+            saveMessageDB(messageModel)
+
+            loadMessage(it)
+            loadDialogs()
+
+        }
+
+
+    }
+
+    private fun saveMessageDB(messageModel: MessageModel) {
+        var message = messageModel.message
+          storIOSQLite
+                .put()
+                .`object`(messageModel)
+                .prepare()
+                .executeAsBlocking()
+
+        storIOSQLite
+                .executeSQL()
+                .withQuery(RawQuery.builder()
+                        .query("update ${DialogTable.TABLE}" +
+                                " set  ${DialogTable.COLUMN_LAST_MESSAGE} =  \" $message  \" " +
+                                " where  ${DialogTable.COLUMN_ID } = $selectedDialod   ")
+                        .build())
+                .prepare()
+                .executeAsBlocking();
+
+    }
+
+
+    override fun saveDialog(dialogModel: DialogModel) {
+        saveDialogDB(dialogModel)
+
+        loadDialogs()
+    }
+
+    private fun saveDialogDB(dialogModel: DialogModel) {
+        storIOSQLite
+                .put()
+                .`object`(dialogModel)
+                .prepare()
+                .executeAsBlocking()
+    }
+
+    var selectedDialod: Long? = null
+    override fun selectedDialog(id: Long) {
+        selectedDialod = id;
+        loadMessage(id)
+
+
+    }
+
+    private fun loadMessage(id: Long) {
         storIOSQLite
                 .get()
                 .listOfObjects(MessageModel::class.java!!)
@@ -25,7 +80,8 @@ class DialogRepository : IDialogRepository {
 
                 .withQuery(RawQuery.builder()
                         .query("select * from ${MessageTable.TABLE} " +
-                                " where ${MessageTable.COLUMN_ID_DIALOG} == $id")
+                                " where ${MessageTable.COLUMN_ID_DIALOG} == $id   " +
+                                " order by ${MessageTable.COLUMN_TIME_CREATE} desc ")
 
                         .build())
                 .prepare()
@@ -36,8 +92,6 @@ class DialogRepository : IDialogRepository {
                         {}
 
                 )
-
-
     }
 
     var storIOSQLite: StorIOSQLite
@@ -69,42 +123,6 @@ class DialogRepository : IDialogRepository {
                         {}
 
                 )
-    }
-
-
-
-
-
-
-
-    override fun loadData() {
-        var lang = ArrayList<DialogModel>()
-
-        lang.add(DialogModel(null, "daw", "dwa", 1212, ""))
-        lang.add(DialogModel(null, "daw", "dwa", 1212, ""))
-        lang.add(DialogModel(null, "daw", "dwa", 1212, ""))
-        lang.add(DialogModel(null, "daw", "dwa", 1212, ""))
-
-        storIOSQLite
-                .put()
-                .objects(lang)
-                .prepare()
-                .executeAsBlocking()
-        var lang1 = ArrayList<MessageModel>()
-
-        lang1.add(MessageModel(null, "daw", 1221, 1212, 2112))
-        lang1.add(MessageModel(null, "daw", 1221, 1212, 2112))
-        lang1.add(MessageModel(null, "daw", 1221, 1212, 2112))
-        lang1.add(MessageModel(null, "daw", 1221, 1212, 2112))
-        lang1.add(MessageModel(null, "daw", 1221, 1212, 2112))
-        lang1.add(MessageModel(null, "daw", 1221, 1212, 2112))
-
-        storIOSQLite
-                .put()
-                .objects(lang1)
-                .prepare()
-                .executeAsBlocking()
-
     }
 
 }

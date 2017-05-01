@@ -28,19 +28,20 @@ class DialogsFragment : MvpAppCompatFragment(), DialogView {
     override fun showDialogs(dialogModels: List<DialogModel>) {
         with(groopAdapter)
         {
-            clearData()
-
-            headerItems.addAll(dialogModels.map {  DialogsItemView(it,onClickListener ) })
-
+            clearHeader()
+            headerItems.addAll(dialogModels.map { DialogsItemView(it, onClickListener) })
+            notifyDataSetChanged()
         }
     }
+
     fun setTitleActionBar(title: String) {
         ((activity as AppCompatActivity).supportActionBar)?.let {
 
-            it.title =  title
+            it.title = title
         }
     }
-    val onClickListener: (ItemView<DialogModel>) -> Unit? = {   mDialogPresenter.selectedDialog(it.value.id)}
+
+    val onClickListener: (ItemView<DialogModel>) -> Unit? = { mDialogPresenter.selectedDialog(it.value.id) }
 
     lateinit var groopAdapter: GroopAdapter
 
@@ -64,9 +65,10 @@ class DialogsFragment : MvpAppCompatFragment(), DialogView {
         super.onViewCreated(view, savedInstanceState)
         configureRecyclerView()
         setTitleActionBar("Диалоги")
-        mDialogPresenter.loadData()
-    }
 
+
+        dialogs_fragment_fab.setOnClickListener { showLangDialog() }
+    }
 
 
     companion object {
@@ -83,4 +85,20 @@ class DialogsFragment : MvpAppCompatFragment(), DialogView {
             return fragment
         }
     }
+
+    var dialogFragment: AddDiaDialog? = null
+
+    private fun showLangDialog() {
+
+        if (activity.supportFragmentManager.findFragmentByTag("AddDiaDialog") != null) {
+            dialogFragment = fragmentManager
+                    .findFragmentByTag("AddDiaDialog") as AddDiaDialog
+        } else {
+            dialogFragment = AddDiaDialog.newInstance()
+
+        }
+        dialogFragment?.callback = { mDialogPresenter.saveDialog(it) }
+        dialogFragment?.show(activity.supportFragmentManager, "AddDiaDialog")
+    }
+
 }

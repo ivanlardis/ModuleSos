@@ -7,6 +7,7 @@ import com.example.i_larin.pixabayreader.di.DI
 import com.example.i_larin.pixabayreader.repository.IDialogRepository
 import com.lardis.i_larin.module.App
 import com.lardis.i_larin.module.presentation.view.setting.DialogView
+import com.lardis.i_larin.module.storage.entities.DialogModel
 import com.lardis.i_larin.module.ui.activity.navigation.NavigationScreens
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -23,9 +24,9 @@ class DialogPresenter : MvpPresenter<DialogView>() {
     init {
         DI.componentManager().businessLogicComponent().inject(this)
         subscribeDialog()
+        subscribeMessage()
     }
 
-    fun loadData() = dialogRepository.loadData()
 
 
     fun selectedDialog(id: Long?) {
@@ -35,6 +36,18 @@ class DialogPresenter : MvpPresenter<DialogView>() {
             Timber.e("$id")
         }
 
+    }
+
+    fun saveMessage(message:String) {
+        dialogRepository.saveMessage(message)
+
+    }
+
+
+    fun saveDialog(dialogModel: DialogModel) {
+
+        dialogRepository.saveDialog(dialogModel)
+        Timber.e("saveDialog")
     }
 
     fun back( ) {
@@ -55,5 +68,18 @@ class DialogPresenter : MvpPresenter<DialogView>() {
 
 
     }
+
+    fun subscribeMessage() {
+
+
+        dialogRepository.subcribeMessage()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ viewState.showMessages(it) },
+                        {}, {})
+
+
+    }
+
 
 }

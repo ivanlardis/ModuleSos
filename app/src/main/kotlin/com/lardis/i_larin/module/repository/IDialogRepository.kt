@@ -6,9 +6,10 @@ import rx.Observable
 
 
 interface IDialogRepository {
-    fun loadData()
+
     fun subcribeDialogs(): Observable<List<DialogModel>>
     fun subcribeMessage(): Observable<List<MessageModel>>
-
+    fun saveDialog(dialogModel: DialogModel)
     fun selectedDialog(id:Long)
+    fun saveMessage(message:String)
 }
