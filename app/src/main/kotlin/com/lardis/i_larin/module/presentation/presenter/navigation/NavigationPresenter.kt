@@ -16,7 +16,9 @@ class NavigationPresenter(val router: Router) : MvpPresenter<NavigationsView>() 
     }
 
 
-
+    fun onBack() {
+        router.backTo(null)
+    }
 
     fun onNewRootCommandClick(nameScreen:String) {
         router.newRootScreen(nameScreen)

@@ -5,11 +5,16 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.i_larin.pixabayreader.di.DI
 import com.example.i_larin.pixabayreader.repository.IDialogRepository
-import com.lardis.i_larin.module.presentation.view.setting.SettingView
+import com.lardis.i_larin.module.App
+import com.lardis.i_larin.module.presentation.view.setting.DialogView
+import com.lardis.i_larin.module.ui.activity.navigation.NavigationScreens
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
-class DialogPresenter : MvpPresenter<SettingView>() {
+class DialogPresenter : MvpPresenter<DialogView>() {
 
 
     @Inject
@@ -17,8 +22,38 @@ class DialogPresenter : MvpPresenter<SettingView>() {
 
     init {
         DI.componentManager().businessLogicComponent().inject(this)
+        subscribeDialog()
     }
 
     fun loadData() = dialogRepository.loadData()
+
+
+    fun selectedDialog(id: Long?) {
+        id?.let {
+            dialogRepository.selectedDialog(id)
+            App.INSTANCE.getRouter().navigateTo(NavigationScreens.MESSAGE)
+            Timber.e("$id")
+        }
+
+    }
+
+    fun back( ) {
+             App.INSTANCE.getRouter().backTo(null)
+
+
+    }
+
+
+    fun subscribeDialog() {
+
+
+        dialogRepository.subcribeDialogs()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ viewState.showDialogs(it) },
+                        {}, {})
+
+
+    }
 
 }

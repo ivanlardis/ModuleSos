@@ -17,8 +17,10 @@ import com.lardis.i_larin.module.App
 import com.lardis.i_larin.module.R
 import com.lardis.i_larin.module.presentation.presenter.navigation.NavigationPresenter
 import com.lardis.i_larin.module.presentation.view.navigation.NavigationsView
+import com.lardis.i_larin.module.presentation.view.navigation.TooggleView
 import com.lardis.i_larin.module.ui.fragment.about.AboutFragment
 import com.lardis.i_larin.module.ui.fragment.dialogs.DialogsFragment
+import com.lardis.i_larin.module.ui.fragment.dialogs.MessagesFragment
 import com.lardis.i_larin.module.ui.fragment.setting.SettingFragment
 import kotlinx.android.synthetic.main.navigation_activity.*
 import kotlinx.android.synthetic.main.navigation_activity_layout_content.*
@@ -26,12 +28,14 @@ import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.SupportFragmentNavigator
 import ru.terrakok.cicerone.commands.Command
+import timber.log.Timber
 
 
-class NavigationActivity : MvpAppCompatActivity(), NavigationsView, NavigationView.OnNavigationItemSelectedListener {
+class NavigationActivity : MvpAppCompatActivity(), NavigationsView, TooggleView,NavigationView.OnNavigationItemSelectedListener {
 
     private var toggle: ActionBarDrawerToggle? = null
     private val MENU_DIALOGS = 0
+
 
     val EMAIL = "EMAIL"
     val PASSWORD = "PASSWORD"
@@ -42,11 +46,30 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationsView, NavigationVi
     var router: Router
     var navigatorHolder: NavigatorHolder
 
+
+    override fun setToggleAsBack(set: Boolean) {
+Timber.e("setToggleAsBack $set  "+(toggle==null))
+        toggle?.setDrawerIndicatorEnabled(!set)
+
+    }
+
     init {
+
+
         router = App.INSTANCE.getRouter()
         navigatorHolder = App.INSTANCE.getNavigatorHolder()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
     @ProvidePresenter
     fun provideRepositoryPresenter(): NavigationPresenter {
         val repositoryPresenter = NavigationPresenter(router)
@@ -71,7 +94,7 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationsView, NavigationVi
         toggle = ActionBarDrawerToggle(this, navigation_activity_drawer_layout,
                 navigation_activity_layout_content_toolbar, 0, 0)
         toggle?.let { navigation_activity_drawer_layout.addDrawerListener(it) }
-
+        toggle?.setToolbarNavigationClickListener{mNavigationPresenter.onBack()}
         navigation_activity_navigation_view.setNavigationItemSelectedListener(this)
 
         if (savedInstanceState == null) {
@@ -101,6 +124,7 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationsView, NavigationVi
             NavigationScreens.ABOUT -> AboutFragment.newInstance()
             NavigationScreens.DIALOG -> DialogsFragment.newInstance()
             NavigationScreens.SETTING -> SettingFragment.newInstance()
+            NavigationScreens.MESSAGE -> MessagesFragment.newInstance()
             else -> SettingFragment.newInstance()
         }
 

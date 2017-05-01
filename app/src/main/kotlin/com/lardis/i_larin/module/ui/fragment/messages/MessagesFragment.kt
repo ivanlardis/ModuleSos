@@ -11,36 +11,37 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
 import com.example.black_sony.testrecyclerview.core.GroopAdapter
-import com.example.black_sony.testrecyclerview.core.ItemView
-import com.example.i_larin.pixabayreader.ui.adapter.view.DialogsItemView
+import com.example.i_larin.pixabayreader.ui.adapter.view.MessagesItemView
 import com.lardis.i_larin.module.R
 import com.lardis.i_larin.module.presentation.presenter.setting.DialogPresenter
+import com.lardis.i_larin.module.presentation.view.navigation.TooggleView
 import com.lardis.i_larin.module.presentation.view.setting.DialogView
 import com.lardis.i_larin.module.storage.entities.DialogModel
 import com.lardis.i_larin.module.storage.entities.MessageModel
 import kotlinx.android.synthetic.main.dialogs_fragment.*
+import timber.log.Timber
 
 
-class DialogsFragment : MvpAppCompatFragment(), DialogView {
+class MessagesFragment : MvpAppCompatFragment(), DialogView {
     override fun showMessages(dialogModels: List<MessageModel>) {
-    }
 
-    override fun showDialogs(dialogModels: List<DialogModel>) {
         with(groopAdapter)
         {
             clearData()
-
-            headerItems.addAll(dialogModels.map {  DialogsItemView(it,onClickListener ) })
-
+            headerItems.addAll(dialogModels.map { MessagesItemView(it) })
         }
     }
+
+    override fun showDialogs(dialogModels: List<DialogModel>) {
+
+    }
+
     fun setTitleActionBar(title: String) {
         ((activity as AppCompatActivity).supportActionBar)?.let {
 
-            it.title =  title
+            it.title = title
         }
     }
-    val onClickListener: (ItemView<DialogModel>) -> Unit? = {   mDialogPresenter.selectedDialog(it.value.id)}
 
     lateinit var groopAdapter: GroopAdapter
 
@@ -63,19 +64,44 @@ class DialogsFragment : MvpAppCompatFragment(), DialogView {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configureRecyclerView()
-        setTitleActionBar("Диалоги")
+
+        setTitleActionBar("Сообщения")
         mDialogPresenter.loadData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Timber.e("onResume")
+        (activity as TooggleView).setToggleAsBack(true)
 
+        ((activity as AppCompatActivity).supportActionBar)?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setDefaultDisplayHomeAsUpEnabled(true)
+            (activity as TooggleView).setToggleAsBack(true)
+
+        }
+
+
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        ((activity as AppCompatActivity).supportActionBar)?.let {
+            it.setDisplayHomeAsUpEnabled(false)
+            it.setDefaultDisplayHomeAsUpEnabled(false)
+            (activity as TooggleView).setToggleAsBack(false)
+
+        }
+    }
 
     companion object {
 
         val TAG = "SettingFragment"
 
 
-        fun newInstance(): DialogsFragment {
-            val fragment = DialogsFragment()
+        fun newInstance(): MessagesFragment {
+            val fragment = MessagesFragment()
 
             val args = Bundle()
             fragment.arguments = args
