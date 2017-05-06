@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "548767141795",
+    "firebase_url": "https://carsos-5620c.firebaseio.com",
+    "project_id": "carsos-5620c",
+    "storage_bucket": "carsos-5620c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548767141795:android:22aed3db5d7ee106",
+        "android_client_info": {
+          "package_name": "com.lardis.i_larin.module"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548767141795-vme8q69uuvq3rbr64tnatmmdgeq58rp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYj2hBDzfdP8OLwjGF8L4YtnGOxR6_EdY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

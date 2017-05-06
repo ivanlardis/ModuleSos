@@ -3,6 +3,7 @@ package com.example.i_larin.pixabayreader.di.model
 import android.content.Context
 import android.database.sqlite.SQLiteOpenHelper
 import com.digittonic.storiosample.db.*
+import com.google.firebase.database.FirebaseDatabase
 import com.lardis.i_larin.module.storage.DbOpenHelper
 import com.lardis.i_larin.module.storage.entities.DialogModel
 import com.lardis.i_larin.module.storage.entities.MessageModel
@@ -23,6 +24,17 @@ class ModelModule(val context: Context) {
     fun provideSQLiteOpenHelper(): SQLiteOpenHelper {
         return DbOpenHelper(context)
     }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseDatabase(): FirebaseDatabase {
+        var instance = FirebaseDatabase.getInstance()
+        instance.setPersistenceEnabled(true)
+        return instance
+    }
+
+
+
 
     @Provides
     @Singleton

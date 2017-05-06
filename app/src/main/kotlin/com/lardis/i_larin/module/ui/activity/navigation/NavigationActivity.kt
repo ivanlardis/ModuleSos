@@ -20,6 +20,7 @@ import com.lardis.i_larin.module.presentation.view.navigation.NavigationsView
 import com.lardis.i_larin.module.presentation.view.navigation.TooggleView
 import com.lardis.i_larin.module.ui.fragment.about.AboutFragment
 import com.lardis.i_larin.module.ui.fragment.dialogs.DialogsFragment
+import com.lardis.i_larin.module.ui.fragment.dialogs.IncidentsFragment
 import com.lardis.i_larin.module.ui.fragment.dialogs.MessagesFragment
 import com.lardis.i_larin.module.ui.fragment.setting.SettingFragment
 import kotlinx.android.synthetic.main.navigation_activity.*
@@ -122,6 +123,7 @@ Timber.e("setToggleAsBack $set  "+(toggle==null))
     private val navigator = object : SupportFragmentNavigator(supportFragmentManager, R.id.navigation_activity_layout_content_container) {
         override fun createFragment(screenKey: String?, data: Any?): Fragment = when (screenKey) {
             NavigationScreens.ABOUT -> AboutFragment.newInstance()
+            NavigationScreens.INCIDENTS -> IncidentsFragment.newInstance()
             NavigationScreens.DIALOG -> DialogsFragment.newInstance()
             NavigationScreens.SETTING -> SettingFragment.newInstance()
             NavigationScreens.MESSAGE -> MessagesFragment.newInstance()
@@ -143,6 +145,7 @@ Timber.e("setToggleAsBack $set  "+(toggle==null))
         when (item.itemId) {
             R.id.nav_dialogs -> mNavigationPresenter.onNewRootCommandClick(NavigationScreens.DIALOG)
             R.id.nav_settings -> mNavigationPresenter.onNewRootCommandClick(NavigationScreens.SETTING)
+            R.id.nav_incidents -> mNavigationPresenter.onNewRootCommandClick(NavigationScreens.INCIDENTS)
             R.id.nav_about -> mNavigationPresenter.onNewRootCommandClick(NavigationScreens.ABOUT)
             R.id.nav_exit -> mNavigationPresenter.onBackCommandClick()
         }

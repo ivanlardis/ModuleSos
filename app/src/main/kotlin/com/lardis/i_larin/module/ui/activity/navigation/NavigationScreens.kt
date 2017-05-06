@@ -10,6 +10,7 @@ object NavigationScreens {
     val DIALOG = "DIALOG"
     val MESSAGE = "MESSAGE"
     val ABOUT = "ABOUT"
+    val INCIDENTS = "INCIDENTS"
 
 
 }

@@ -3,6 +3,7 @@ package com.example.i_larin.pixabayreader.di.component
 import com.example.i_larin.pixabayreader.di.model.BusinessLogicModule
 import com.example.i_larin.pixabayreader.di.model.ModelModule
 import com.example.i_larin.pixabayreader.repository.DialogRepository
+import com.example.i_larin.pixabayreader.repository.IncidentsRepository
 import com.example.i_larin.pixabayreader.repository.LoginRepository
 import dagger.Component
 import javax.inject.Singleton
@@ -20,4 +21,5 @@ interface AppComponent {
 
     fun inject(entry: DialogRepository)
     fun inject(entry: LoginRepository)
+    fun inject(entry: IncidentsRepository)
 }

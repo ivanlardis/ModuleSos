@@ -1,9 +1,7 @@
 package com.example.i_larin.pixabayreader.di.model
 
-import com.example.i_larin.pixabayreader.repository.DialogRepository
-import com.example.i_larin.pixabayreader.repository.IDialogRepository
-import com.example.i_larin.pixabayreader.repository.ILoginRepository
-import com.example.i_larin.pixabayreader.repository.LoginRepository
+import com.example.i_larin.pixabayreader.repository.*
+import com.google.firebase.database.FirebaseDatabase
 import com.pushtorefresh.storio.sqlite.StorIOSQLite
 import dagger.Module
 import dagger.Provides
@@ -26,7 +24,13 @@ class BusinessLogicModule {
     @Singleton
     @Provides
     fun provideLoginRepository(): ILoginRepository {
-        return LoginRepository( )
+        return LoginRepository()
+    }
+
+    @Singleton
+    @Provides
+    fun provideIncidentsRepository(firebaseDatabase: FirebaseDatabase): IIncidentsRepository {
+        return IncidentsRepository(firebaseDatabase)
     }
 
 }

@@ -28,7 +28,7 @@
         <activity android:name=".ui.activity.navigation.NavigationActivity" />
         <activity
             android:name=".ui.activity.login.LoginActivity"
-            android:noHistory="true" />
+            />
     </application>
 
 </manifest>
