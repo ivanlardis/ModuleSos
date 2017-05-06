@@ -1,6 +1,7 @@
 <resources>
 
 
+    <integer name="com_vk_sdk_AppId">5420364</integer>
     <string name="menu_dialogs">Диалоги</string>
     <string name="menu_settings">Настройки</string>
     <string name="menu_about">О приложении</string>
