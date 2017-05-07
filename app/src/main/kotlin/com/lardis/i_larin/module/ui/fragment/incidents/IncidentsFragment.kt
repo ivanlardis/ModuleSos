@@ -15,18 +15,21 @@ import com.example.i_larin.pixabayreader.ui.adapter.view.IncidentsItemView
 import com.lardis.i_larin.module.R
 import com.lardis.i_larin.module.presentation.presenter.setting.IncidentsPresenter
 import com.lardis.i_larin.module.presentation.view.setting.IncidentsView
-import com.lardis.i_larin.module.repository.TestModel
+import com.lardis.i_larin.module.model.FBModel
+import com.lardis.i_larin.module.model.IncidentsModel
+import com.lardis.i_larin.module.model.IncidentsViewModel
 import kotlinx.android.synthetic.main.incidents_fragment.*
 
 
 class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
-    override fun show(data: MutableList<TestModel>) {
+    override fun show(data: IncidentsModel) {
         with(groopAdapter)
         {
             clearHeader()
-            headerItems.addAll(data.map { IncidentsItemView(it) })
+            headerItems.addAll(data.incidents.map { IncidentsItemView(IncidentsViewModel(it,data.user.get(it.idUser))) })
             notifyDataSetChanged()
         } }
+
 
 
     @InjectPresenter(type = PresenterType.GLOBAL)

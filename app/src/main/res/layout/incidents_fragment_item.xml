@@ -7,16 +7,19 @@
     android:background="@color/colorAccent">
 
 
-
+    <ImageView
+        android:id="@+id/incidents_fragment_item_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp" />
 
     <TextView
         android:id="@+id/incidents_fragment_item_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
- 
+        android:layout_marginLeft="56dp"
+
         android:text="RU-EN" />
 
-    
 
 </FrameLayout>

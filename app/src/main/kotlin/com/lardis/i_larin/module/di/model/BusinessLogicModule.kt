@@ -1,5 +1,6 @@
 package com.example.i_larin.pixabayreader.di.model
 
+import com.example.i_larin.pixabayreader.network.VKApi
 import com.example.i_larin.pixabayreader.repository.*
 import com.google.firebase.database.FirebaseDatabase
 import com.pushtorefresh.storio.sqlite.StorIOSQLite
@@ -29,8 +30,8 @@ class BusinessLogicModule {
 
     @Singleton
     @Provides
-    fun provideIncidentsRepository(firebaseDatabase: FirebaseDatabase): IIncidentsRepository {
-        return IncidentsRepository(firebaseDatabase)
+    fun provideIncidentsRepository(api: VKApi, firebaseDatabase: FirebaseDatabase): IIncidentsRepository {
+        return IncidentsRepository(api,firebaseDatabase)
     }
 
 }
