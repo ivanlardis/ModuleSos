@@ -2,10 +2,11 @@
 
 
     <integer name="com_vk_sdk_AppId">5420364</integer>
-    <string name="menu_dialogs">Диалоги</string>
+    <string name="menu_dialogs">Диалоги БД</string>
     <string name="menu_settings">Настройки</string>
     <string name="menu_about">О приложении</string>
-    <string name="menu_incidents">Происшествия</string>
+    <string name="menu_mes_loader">Лоадеры Сообшение </string>
+    <string name="menu_incidents">Firebase</string>
     <string name="menu_exit">Выход</string>
     <string name="about">Приложение разработано в рамках тестового задания Тинькофф Финтех Школа Иван Ларин. Ларин Иван. 2017 год.</string>
     <string name="about_link">"Узнайте больше на https://fintech.tinkoff.ru/</string>

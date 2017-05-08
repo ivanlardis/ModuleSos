@@ -12,7 +12,6 @@ import com.lardis.i_larin.module.presentation.view.login.LoginView
 import com.lardis.i_larin.module.ui.activity.navigation.NavigationActivity
 import com.vk.sdk.VKAccessToken
 import com.vk.sdk.VKCallback
-import com.vk.sdk.VKScope
 import com.vk.sdk.VKSdk
 import com.vk.sdk.api.VKError
 import kotlinx.android.synthetic.main.login_activity.*
@@ -58,7 +57,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
         login_activity_button_vk.setOnClickListener {
 
-            VKSdk.login(this, "scope=groups,friends,wall,video,audio,pages,messages,offline");
+            VKSdk.login(this, "scope=groups,friends,wall,video,audio,pages,messages,offline")
 
         }
 
@@ -68,15 +67,18 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         val intent = Intent(this@LoginActivity, NavigationActivity::class.java)
         intent.putExtra(EMAIL, login_activity_edit_text_email.getText().toString())
         intent.putExtra(PASSWORD, login_activity_edit_text_password.getText().toString())
+
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
             override fun onResult(res: VKAccessToken) {
                 val intent = Intent(this@LoginActivity, NavigationActivity::class.java)
                 intent.putExtra(EMAIL, VKAccessToken.currentToken().userId)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }
 

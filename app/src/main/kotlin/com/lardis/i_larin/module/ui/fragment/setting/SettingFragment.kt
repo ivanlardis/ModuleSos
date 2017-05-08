@@ -28,7 +28,7 @@ class SettingFragment : MvpAppCompatFragment(), SettingView {
 
     companion object {
 
-        val TAG = "SettingFragment"
+        val TAG = "MesLoaderFragment"
 
 
         fun newInstance(): SettingFragment {

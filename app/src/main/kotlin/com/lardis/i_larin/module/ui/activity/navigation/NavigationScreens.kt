@@ -11,6 +11,7 @@ object NavigationScreens {
     val MESSAGE = "MESSAGE"
     val ABOUT = "ABOUT"
     val INCIDENTS = "INCIDENTS"
+    val MES_LOADER = "MES_LOADER"
 
 
 }

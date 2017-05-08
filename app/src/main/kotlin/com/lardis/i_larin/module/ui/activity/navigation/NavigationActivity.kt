@@ -22,6 +22,7 @@ import com.lardis.i_larin.module.ui.fragment.about.AboutFragment
 import com.lardis.i_larin.module.ui.fragment.dialogs.DialogsFragment
 import com.lardis.i_larin.module.ui.fragment.dialogs.IncidentsFragment
 import com.lardis.i_larin.module.ui.fragment.dialogs.MessagesFragment
+import com.lardis.i_larin.module.ui.fragment.setting.MesLoaderFragment
 import com.lardis.i_larin.module.ui.fragment.setting.SettingFragment
 import kotlinx.android.synthetic.main.navigation_activity.*
 import kotlinx.android.synthetic.main.navigation_activity_layout_content.*
@@ -124,6 +125,7 @@ Timber.e("setToggleAsBack $set  "+(toggle==null))
         override fun createFragment(screenKey: String?, data: Any?): Fragment = when (screenKey) {
             NavigationScreens.ABOUT -> AboutFragment.newInstance()
             NavigationScreens.INCIDENTS -> IncidentsFragment.newInstance()
+            NavigationScreens.MES_LOADER -> MesLoaderFragment.newInstance()
             NavigationScreens.DIALOG -> DialogsFragment.newInstance()
             NavigationScreens.SETTING -> SettingFragment.newInstance()
             NavigationScreens.MESSAGE -> MessagesFragment.newInstance()
@@ -147,6 +149,7 @@ Timber.e("setToggleAsBack $set  "+(toggle==null))
             R.id.nav_settings -> mNavigationPresenter.onNewRootCommandClick(NavigationScreens.SETTING)
             R.id.nav_incidents -> mNavigationPresenter.onNewRootCommandClick(NavigationScreens.INCIDENTS)
             R.id.nav_about -> mNavigationPresenter.onNewRootCommandClick(NavigationScreens.ABOUT)
+            R.id.nav_mes_loader -> mNavigationPresenter.onNewRootCommandClick(NavigationScreens.MES_LOADER)
             R.id.nav_exit -> mNavigationPresenter.onBackCommandClick()
         }
         navigation_activity_drawer_layout.closeDrawer(GravityCompat.START)

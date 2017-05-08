@@ -73,7 +73,7 @@ class DialogsFragment : MvpAppCompatFragment(), DialogView {
 
     companion object {
 
-        val TAG = "SettingFragment"
+        val TAG = "MesLoaderFragment"
 
 
         fun newInstance(): DialogsFragment {

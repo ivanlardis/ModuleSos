@@ -46,7 +46,7 @@ class IncidentsRepository : IIncidentsRepository {
 
 
     override fun add() {
-        addElement(FBModel("ann" + (i++), "" + VKAccessToken.currentToken().userId))
+        addElement(FBModel("ann" + (i++), "" + VKAccessToken.currentToken()?.userId))
 
     }
 

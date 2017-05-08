@@ -111,7 +111,7 @@ fun initView()
 
     companion object {
 
-        val TAG = "SettingFragment"
+        val TAG = "MesLoaderFragment"
 
 
         fun newInstance(): MessagesFragment {
