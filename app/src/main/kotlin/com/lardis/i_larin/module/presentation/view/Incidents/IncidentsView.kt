@@ -1,13 +1,12 @@
 package com.lardis.i_larin.module.presentation.view.setting
 
 import com.arellomobile.mvp.MvpView
-import com.lardis.i_larin.module.model.IncidentsModel
-import rx.Observable
+import com.lardis.i_larin.module.model.FBModel
 
 interface IncidentsView : MvpView
 {
 
-    fun show(data:  IncidentsModel)
+    fun show(data:  List<FBModel>)
 
 }
 

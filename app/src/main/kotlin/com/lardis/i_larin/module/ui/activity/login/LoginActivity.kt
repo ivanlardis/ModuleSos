@@ -76,6 +76,9 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
             override fun onResult(res: VKAccessToken) {
+
+                mLoginPresenter.updateInfo()
+
                 val intent = Intent(this@LoginActivity, NavigationActivity::class.java)
                 intent.putExtra(EMAIL, VKAccessToken.currentToken().userId)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

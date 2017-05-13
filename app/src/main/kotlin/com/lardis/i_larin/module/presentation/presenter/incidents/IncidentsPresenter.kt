@@ -6,6 +6,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.i_larin.pixabayreader.di.DI
 import com.example.i_larin.pixabayreader.repository.IIncidentsRepository
 import com.lardis.i_larin.module.presentation.view.setting.IncidentsView
+import com.lardis.i_larin.module.ui.fragment.incidents.IncidentAddModel
 import rx.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
@@ -36,8 +37,8 @@ class IncidentsPresenter : MvpPresenter<IncidentsView>() {
         dialogRepository.rm()
 
     }
-    fun add() {
-        dialogRepository.add()
+    fun add(incidentAddModel: IncidentAddModel) {
+        dialogRepository.add(incidentAddModel)
 
     }
 

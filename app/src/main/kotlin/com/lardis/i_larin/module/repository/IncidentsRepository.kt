@@ -6,14 +6,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.lardis.i_larin.module.model.FBModel
-import com.lardis.i_larin.module.model.IncidentsModel
-import com.lardis.i_larin.module.model.UserModel
+import com.lardis.i_larin.module.prefs.Prefs
+import com.lardis.i_larin.module.ui.fragment.incidents.IncidentAddModel
 import com.vk.sdk.VKAccessToken
 import rx.Observable
-import rx.schedulers.Schedulers
 import rx.subjects.BehaviorSubject
 import timber.log.Timber
-import java.util.*
 
 
 class IncidentsRepository : IIncidentsRepository {
@@ -21,11 +19,11 @@ class IncidentsRepository : IIncidentsRepository {
     }
 
 
-    private var behaviorSubject: BehaviorSubject<IncidentsModel>
-            = BehaviorSubject.create<IncidentsModel>()
+    private var behaviorSubject: BehaviorSubject<List<FBModel>>
+            = BehaviorSubject.create<List<FBModel>>()
 
 
-    override fun subcRep(): Observable<IncidentsModel> {
+    override fun subcRep(): Observable<List<FBModel>> {
 
         return behaviorSubject.asObservable()
 
@@ -45,9 +43,29 @@ class IncidentsRepository : IIncidentsRepository {
     var i = 1;
 
 
-    override fun add() {
-        addElement(FBModel("ann" + (i++), "" + VKAccessToken.currentToken()?.userId))
+    override fun add(incidentAddModel: IncidentAddModel) {
+        VKAccessToken.currentToken()?.let {
 
+            var fBModel = FBModel()
+            fBModel.idUser = it.userId
+
+            fBModel.name = Prefs.FIRST_NAME.string
+            fBModel.family = Prefs.LAST_NAME.string
+            fBModel.photoUrl = Prefs.PHOTO_URL.string
+            fBModel.idUser = it.userId
+
+
+
+            fBModel.car = incidentAddModel.car
+            fBModel.phoneNumber = incidentAddModel.phoneNumber
+            fBModel.mapInfo = incidentAddModel.mapInfo
+            fBModel.latitude = incidentAddModel.latitude
+            fBModel.longitude = incidentAddModel.longitude
+            fBModel.intident = incidentAddModel.intident
+
+
+            addElement(fBModel)
+        }
     }
 
     fun addElement(myObject: FBModel) {
@@ -68,28 +86,11 @@ class IncidentsRepository : IIncidentsRepository {
         reference.removeValue({ databaseError, databaseReference -> {} })
     }
 
-    fun loadData(ids: Set<String>, list: MutableList<FBModel>) {
 
-        Observable.zip(Observable.just(list), getUsers(ids),
-                { fbModel, id -> zipModels(fbModel, id) })
-                .subscribeOn(Schedulers.io())
-                .subscribe({behaviorSubject.onNext(it)},{},{})
+//    fun getUsers(ids: Set<String>) =
+//            mVKApi.getUsers(ids.toString().replace("[", "").replace("]", ""), "photo_50", "5.64")
+//                    .map { it.response }
 
-
-    }
-
-    private fun zipModels(fbModel: MutableList<FBModel>, id: MutableList<UserModel>?): IncidentsModel {
-        var usersModels = HashMap<String, UserModel>()
-        id?.forEach {
-            usersModels.put("" + it.uid, it)
-        }
-
-        return IncidentsModel(usersModels, fbModel)
-    }
-
-    fun getUsers(ids: Set<String>) =
-            mVKApi.getUsers(ids.toString().replace("[", "").replace("]", ""), "photo_50", "5.64")
-                    .map { it.response }
 
 
     fun showElement() {
@@ -101,16 +102,17 @@ class IncidentsRepository : IIncidentsRepository {
 
             override fun onDataChange(p0: DataSnapshot?) {
                 val list = mutableListOf<FBModel>()
-                val set = HashSet<String>()
+
                 p0?.children?.
                         forEach {
 
                             var value = it.getValue(FBModel::class.java)
-                            set.add(value.idUser)
-
                             list.add(value)
+
                         }
-                loadData(set, list)
+                behaviorSubject.onNext(list)
+
+
 
 
             }

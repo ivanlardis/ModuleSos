@@ -9,8 +9,13 @@ import rx.functions.Func1;
 
 
 public enum Prefs {
-    USER_ID(PrefsTypes.LONG, 1234L),
+    USER_ID(PrefsTypes.INT, -1 ),
+    FIRST_NAME(PrefsTypes.STR, ""),
+    LAST_NAME(PrefsTypes.STR, ""),
+    PHOTO_URL(PrefsTypes.STR, ""),
+
     LOGIN(PrefsTypes.STR, "admin"),
+
     PASWORD(PrefsTypes.STR, "1234");
 
 

@@ -20,6 +20,10 @@ class LoginPresenter : MvpPresenter<LoginView>() {
     }
 
 
+    fun updateInfo() {
+
+        dialogRepository.updateInfo()
+    }
     fun checkUser(login: String, password: String) {
 
         viewState.showProgress(true)

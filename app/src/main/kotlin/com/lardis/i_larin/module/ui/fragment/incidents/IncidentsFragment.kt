@@ -7,30 +7,30 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
 import com.example.black_sony.testrecyclerview.core.GroopAdapter
 import com.example.i_larin.pixabayreader.ui.adapter.view.IncidentsItemView
 import com.lardis.i_larin.module.R
-import com.lardis.i_larin.module.model.IncidentsModel
-import com.lardis.i_larin.module.model.IncidentsViewModel
+import com.lardis.i_larin.module.model.FBModel
 import com.lardis.i_larin.module.presentation.presenter.setting.IncidentsPresenter
 import com.lardis.i_larin.module.presentation.view.setting.IncidentsView
-import com.vk.sdk.VKSdk
+import com.lardis.i_larin.module.ui.fragment.incidents.IncidentAddDialog
 import kotlinx.android.synthetic.main.incidents_fragment.*
 
 
 class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
-    override fun show(data: IncidentsModel) {
+    override fun show(data: List<FBModel>) {
         with(groopAdapter)
         {
             clearHeader()
-            headerItems.addAll(data.incidents.map { IncidentsItemView(IncidentsViewModel(it, data.user.get(it.idUser))) })
+            headerItems.addAll(data.map { IncidentsItemView(it) })
             notifyDataSetChanged()
         }
     }
+
+
 
 
     @InjectPresenter(type = PresenterType.GLOBAL)
@@ -62,19 +62,16 @@ class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
         super.onViewCreated(view, savedInstanceState)
         configureRecyclerView()
 
-        incidents_fragment_button_add.setOnClickListener {
+        incidents_fragment_fabutton.setOnClickListener {
 
-            if (VKSdk.isLoggedIn())
-                mIncidentsPresenter.add()
-            else Toast.makeText(context, "Извините Нужно залогинеться через ВК чтоб работало",
-                    Toast.LENGTH_SHORT).show()
+           showIncidentAddDialog()
         }
-        incidents_fragment_button_rm.setOnClickListener {
-            if (VKSdk.isLoggedIn())
-                mIncidentsPresenter.rm()
-            else Toast.makeText(context, "Извините Нужно залогинеться через ВК чтоб работало",
-                    Toast.LENGTH_SHORT).show()
-        }
+//        incidents_fragment_button_rm.setOnClickListener {
+//            if (VKSdk.isLoggedIn())
+//                mIncidentsPresenter.rm()
+//            else Toast.makeText(context, "Извините Нужно залогинеться через ВК чтоб работало",
+//                    Toast.LENGTH_SHORT).show()
+//        }
         setTitleActionBar("Происшествия")
         mIncidentsPresenter.loadData()
     }
@@ -99,5 +96,25 @@ class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
             it.title = title
         }
     }
+
+
+    private var dialogFragment: IncidentAddDialog? = null
+    private fun showIncidentAddDialog() {
+
+        if (activity.supportFragmentManager.findFragmentByTag("IncidentAddDialog") != null) {
+            dialogFragment = fragmentManager
+                    .findFragmentByTag("IncidentAddDialog") as IncidentAddDialog
+        } else {
+            dialogFragment = IncidentAddDialog.newInstance()
+
+        }
+        dialogFragment?.callback={
+            mIncidentsPresenter.add(it)
+
+
+        }
+        dialogFragment?.show(activity.supportFragmentManager, "IncidentAddDialog")
+    }
+
 
 }

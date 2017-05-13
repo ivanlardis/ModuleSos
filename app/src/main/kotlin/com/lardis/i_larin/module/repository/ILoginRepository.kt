@@ -7,4 +7,5 @@ interface ILoginRepository {
 
 
     fun checkUser(login:String,password:String): Observable<Boolean>
+    fun updateInfo( )
 }

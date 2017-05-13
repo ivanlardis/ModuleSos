@@ -16,6 +16,8 @@ class SplashActivity : MvpAppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (VKSdk.isLoggedIn()) {
+
+
             val intent = Intent(this, NavigationActivity::class.java)
             intent.putExtra(EMAIL, VKAccessToken.currentToken().userId)
             startActivity(intent)

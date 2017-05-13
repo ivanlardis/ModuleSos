@@ -17,7 +17,7 @@ class DialogRepository : IDialogRepository {
     override fun saveMessage(message: String) {
 
         selectedDialod?.let {
-            var messageModel = MessageModel(null, message, Prefs.USER_ID.long, it,
+            var messageModel = MessageModel(null, message, Prefs.USER_ID.integer, it,
                     System.currentTimeMillis())
             saveMessageDB(messageModel)
 

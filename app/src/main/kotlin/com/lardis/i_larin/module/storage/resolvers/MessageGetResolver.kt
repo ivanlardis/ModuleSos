@@ -14,7 +14,7 @@ class MessageGetResolver : DefaultGetResolver<MessageModel>() {
         val track = MessageModel(
                 cursor.getLong(cursor.getColumnIndexOrThrow(MessageTable.COLUMN_ID)),
                 cursor.getString(cursor.getColumnIndexOrThrow(MessageTable.COLUMN_MESSAGE)),
-                cursor.getLong(cursor.getColumnIndexOrThrow(MessageTable.COLUMN_ID_AUTHOR)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(MessageTable.COLUMN_ID_AUTHOR)),
                 cursor.getLong(cursor.getColumnIndexOrThrow(MessageTable.COLUMN_ID_DIALOG)),
                 cursor.getLong(cursor.getColumnIndexOrThrow(MessageTable.COLUMN_TIME_CREATE))
 

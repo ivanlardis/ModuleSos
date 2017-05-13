@@ -24,8 +24,8 @@ class BusinessLogicModule {
 
     @Singleton
     @Provides
-    fun provideLoginRepository(): ILoginRepository {
-        return LoginRepository()
+    fun provideLoginRepository(api: VKApi): ILoginRepository {
+        return LoginRepository(api)
     }
 
     @Singleton

@@ -7,7 +7,17 @@ package com.lardis.i_larin.module.model
 {
 
   var name: String = ""
+  var family: String = ""
+  var photoUrl: String = ""
   var idUser: String = ""
+  var createTime: Long = System.currentTimeMillis()
+
+  var intident: String = ""
+  var car: String = ""
+  var phoneNumber: String = ""
+  var mapInfo: String = ""
+  var latitude: Double? =null
+  var longitude: Double?=null
   constructor()
   {
 
