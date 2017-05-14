@@ -14,7 +14,10 @@ import com.example.black_sony.testrecyclerview.core.GroopAdapter
 import com.example.black_sony.testrecyclerview.core.ItemView
 import com.example.black_sony.testrecyclerview.core.OnlyItemAdapter
 import com.example.black_sony.testrecyclerview.view.IncidentTitleItemView
-import com.example.i_larin.pixabayreader.ui.adapter.view.*
+import com.example.i_larin.pixabayreader.ui.adapter.view.IncidentAddComentsItemView
+import com.example.i_larin.pixabayreader.ui.adapter.view.IncidentButtonItemView
+import com.example.i_larin.pixabayreader.ui.adapter.view.IncidentCompleteItemView
+import com.example.i_larin.pixabayreader.ui.adapter.view.IncidentsCommentItemView
 import com.lardis.i_larin.module.R
 import com.lardis.i_larin.module.model.FBModel
 import com.lardis.i_larin.module.prefs.Prefs
@@ -28,7 +31,7 @@ import java.util.*
 
 class IntidentActivity : MvpAppCompatActivity(), View.OnClickListener, IncidentsView {
 
-    var incidentTitleItemView = IncidentTitleItemView("Коменнтарии")
+    var incidentTitleItemView = IncidentTitleItemView("Комментарии")
     override fun showSelected(data: FBModel) {
 
         createView(data)
@@ -37,50 +40,71 @@ class IntidentActivity : MvpAppCompatActivity(), View.OnClickListener, Incidents
         {
 
             clearAll()
-            headerItems.add(IncidentCreateItemView(data, {}))
 
 
-
-            if (data.phoneNumber.length > 3) {
-                headerItems.add(IncidentButtonItemView(data, "Позвонить", {
-
-                    val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${data.phoneNumber}"))
-                    startActivity(intent)
-
-                }))
-                headerItems.add(IncidentButtonItemView(data, "Написать смс", {
-
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("sms:${data.phoneNumber}"))
-                    startActivity(intent)
-
-                }))
-
-            }
-            if (data.longitude != null && data.latitude != null) {
-                headerItems.add(IncidentButtonItemView(data, "Открыть на карте", {
-                    Timber.e("${data.longitude},${data.latitude}")
-
-                    val geoUriString = "geo:${data.latitude},${data.longitude}?z=2"
-                    val geoUri = Uri.parse(geoUriString)
-                    val mapIntent = Intent(Intent.ACTION_VIEW, geoUri)
-                    startActivity(mapIntent)
-
-                }))
-
-            }
-
-
-            if (data.compeleteTime > 0) {
                 headerItems.add(IncidentCompleteItemView(data, {}))
-            } else if (data.idUser.equals("" + Prefs.USER_ID.integer)) {
 
-                headerItems.add(IncidentButtonItemView(data, "Проблемма решена", {
-                    Timber.e("IncidentButtonItemView")
-                    mIncidentsPresenter.completed(it)
 
-                }))
 
+
+
+
+
+            if (!(data.compeleteTime > 0)) {
+                if (data.idUser.equals("" + Prefs.USER_ID.integer)) {
+
+                    headerItems.add(IncidentButtonItemView(data, "Проблема решена", {
+                        Timber.e("IncidentButtonItemView")
+                        mIncidentsPresenter.completed(it)
+
+                    }))
+
+
+
+                }
+                else
+                {
+
+                    if (data.phoneNumber.length > 3) {
+                        headerItems.add(IncidentButtonItemView(data, "Позвонить", {
+
+                            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${data.phoneNumber}"))
+                            startActivity(intent)
+
+                        }))
+                        headerItems.add(IncidentButtonItemView(data, "Написать смс", {
+
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("sms:${data.phoneNumber}"))
+                            startActivity(intent)
+
+                        }))
+
+                    }
+                    if (data.longitude != null && data.latitude != null) {
+                        headerItems.add(IncidentButtonItemView(data, "Открыть на карте", {
+                            Timber.e("${data.longitude},${data.latitude}")
+
+                            val geoUriString = "geo:${data.latitude},${data.longitude}?z=2"
+                            val geoUri = Uri.parse(geoUriString)
+                            val mapIntent = Intent(Intent.ACTION_VIEW, geoUri)
+                            startActivity(mapIntent)
+
+                        }))
+
+                    }
+
+
+
+
+                }
             }
+
+
+
+
+
+
+
 
 
             var list: MutableList<ItemView<*>> = ArrayList()
@@ -88,6 +112,7 @@ class IntidentActivity : MvpAppCompatActivity(), View.OnClickListener, Incidents
 
 
             var pixabayImagesAdapter = OnlyItemAdapter()
+
             pixabayImagesAdapter.updateItemViews(list)
 
             pixabayImagesAdapter.footerItems.add(IncidentAddComentsItemView({

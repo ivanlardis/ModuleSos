@@ -11,7 +11,7 @@ class IncidentTitleItemView(value: String) : GroupTitleItemView<String>(value, {
 
     override fun getLayoutId(): Int {
 
-        return R.layout.incidents_activity_button_item; }
+        return R.layout.incidents_activity_title_item; }
 
 
     override fun bind(view: View) {
@@ -19,7 +19,6 @@ class IncidentTitleItemView(value: String) : GroupTitleItemView<String>(value, {
 
         with(view)
         {
-
             incidents_activity_completed_item_button.text = value
             incidents_activity_completed_item_button.setOnClickListener {
                 expand = !expand
