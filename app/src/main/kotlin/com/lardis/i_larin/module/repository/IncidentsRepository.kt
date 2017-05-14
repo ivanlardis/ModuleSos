@@ -28,6 +28,16 @@ class IncidentsRepository : IIncidentsRepository {
         return behaviorSubject.asObservable()
 
     }
+    private var behaviorSubjectSelected: BehaviorSubject<FBModel>
+            = BehaviorSubject.create<FBModel>()
+
+
+    override fun subcRepSelected(): Observable<  FBModel > {
+
+        return behaviorSubjectSelected.asObservable()
+
+    }
+
 
     var mFirebaseDatabase: FirebaseDatabase
     var mVKApi: VKApi
@@ -76,9 +86,19 @@ class IncidentsRepository : IIncidentsRepository {
             }
 
             override fun onDataChange(p0: DataSnapshot?) {
-                reference.push().setValue(myObject)
+                var push = reference.push()
+                myObject.key=push.key
+                push.setValue(myObject)
             }
         })
+    }
+
+var selectedModel:FBModel?=null
+    override fun selected(fBModel:FBModel)
+    {
+        selectedModel=fBModel
+        behaviorSubjectSelected.onNext(fBModel)
+
     }
 
     override fun rm() {
@@ -105,7 +125,7 @@ class IncidentsRepository : IIncidentsRepository {
 
                 p0?.children?.
                         forEach {
-
+                            it.key
                             var value = it.getValue(FBModel::class.java)
                             list.add(value)
 

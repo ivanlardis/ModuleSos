@@ -7,6 +7,7 @@ interface IncidentsView : MvpView
 {
 
     fun show(data:  List<FBModel>)
+    fun showSelected(data:   FBModel)
 
 }
 

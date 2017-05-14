@@ -35,6 +35,10 @@
         <activity
             android:name=".ui.activity.login.LoginActivity"
             />
+
+        <activity
+            android:name=".ui.activity.intident.IntidentActivity"
+            />
     </application>
 
 </manifest>

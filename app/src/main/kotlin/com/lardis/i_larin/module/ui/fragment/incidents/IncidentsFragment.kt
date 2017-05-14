@@ -1,5 +1,6 @@
 package com.lardis.i_larin.module.ui.fragment.dialogs
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -11,26 +12,36 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
 import com.example.black_sony.testrecyclerview.core.GroopAdapter
+import com.example.black_sony.testrecyclerview.core.ItemView
 import com.example.i_larin.pixabayreader.ui.adapter.view.IncidentsItemView
 import com.lardis.i_larin.module.R
 import com.lardis.i_larin.module.model.FBModel
 import com.lardis.i_larin.module.presentation.presenter.setting.IncidentsPresenter
 import com.lardis.i_larin.module.presentation.view.setting.IncidentsView
+import com.lardis.i_larin.module.ui.activity.intident.IntidentActivity
 import com.lardis.i_larin.module.ui.fragment.incidents.IncidentAddDialog
 import kotlinx.android.synthetic.main.incidents_fragment.*
 
 
 class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
+    override fun showSelected(data: FBModel) {}
+
     override fun show(data: List<FBModel>) {
         with(groopAdapter)
         {
             clearHeader()
-            headerItems.addAll(data.map { IncidentsItemView(it) })
+            headerItems.addAll(data.map { IncidentsItemView(it, onClickListener) })
             notifyDataSetChanged()
         }
     }
 
+    var onClickListener: (ItemView<FBModel>) -> Unit? = {
+        mIncidentsPresenter.selected(it.value)
 
+        val intent = Intent(context, IntidentActivity::class.java)
+        startActivity(intent)
+
+    }
 
 
     @InjectPresenter(type = PresenterType.GLOBAL)
@@ -47,7 +58,7 @@ class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
 
             linearLayoutManager.setReverseLayout(true)
             setLayoutManager(linearLayoutManager)
-            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.HORIZONTAL))
             setAdapter(groopAdapter)
         }
     }
@@ -64,7 +75,7 @@ class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
 
         incidents_fragment_fabutton.setOnClickListener {
 
-           showIncidentAddDialog()
+            showIncidentAddDialog()
         }
 //        incidents_fragment_button_rm.setOnClickListener {
 //            if (VKSdk.isLoggedIn())
@@ -108,13 +119,11 @@ class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
             dialogFragment = IncidentAddDialog.newInstance()
 
         }
-        dialogFragment?.callback={
+        dialogFragment?.callback = {
             mIncidentsPresenter.add(it)
-
 
         }
         dialogFragment?.show(activity.supportFragmentManager, "IncidentAddDialog")
     }
-
 
 }

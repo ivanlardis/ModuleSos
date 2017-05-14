@@ -9,8 +9,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.incidents_fragment_item.view.*
 import java.text.SimpleDateFormat
 
-var DATE_FORMAT =   SimpleDateFormat("dd-MM-yy:HH:mm:SS");
-class IncidentsItemView(value: FBModel) : ItemView<FBModel>(value, {}) {
+class IncidentsItemView(value: FBModel,  onClickListener: (ItemView<FBModel>) -> Unit?) : ItemView<FBModel>(value, onClickListener) {
     override fun getLayoutId() = R.layout.incidents_fragment_item
 
     override fun bind(view: View) {
@@ -30,3 +29,4 @@ class IncidentsItemView(value: FBModel) : ItemView<FBModel>(value, {}) {
         }
     }
 }
+var DATE_FORMAT =   SimpleDateFormat("dd-MM-yy:HH:mm:SS");

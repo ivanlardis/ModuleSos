@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="164dp"
+    android:background="#00000000"
+    android:paddingBottom="14dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp">
+
+    <FrameLayout
+        android:id="@+id/testest"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#000000">
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/collapsed_card_thumbs"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="top|start"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp" />
+
+    <LinearLayout
+        android:id="@+id/collapsed_card_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/collapsed_card_thumbs"
+        android:background="#00000000"
+        android:orientation="vertical">
+        <!--todo заменить на customTextView-->
+        <TextView
+            android:id="@+id/collapsed_card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Иван"
+            android:textSize="24sp" />
+        <!--todo заменить на customTextView-->
+        <TextView
+            android:id="@+id/collapsed_card_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Ларин"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/collapsed_card_description_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/collapsed_card_title_layout">
+
+
+        <LinearLayout
+            android:id="@+id/collapsed_card_value_layout"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="3dp"
+                    android:src="@drawable/ic_call_black_24dp" />
+
+                <TextView
+                    android:id="@+id/collapsed_card_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Тел: 8212121211212 "
+                    android:textColor="@color/grey"
+                    android:lines="1"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="3dp"
+                    android:src="@drawable/ic_directions_car_black_24dp" />
+
+                <TextView
+
+                    android:id="@+id/collapsed_card_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="Машина "
+                    android:lines="1"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="3dp"
+                    android:src="@drawable/ic_add_location_black_24dp" />
+
+
+                <TextView
+                    android:id="@+id/collapsed_card_extra_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:lines="1"
+                    android:text="за 23 мин"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/collapsed_card_alert_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:visibility="gone">
+            <!--todo заменить на customTextView-->
+            <TextView
+                android:id="@+id/collapsed_card_alert_textline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Расчет калорий неприменим"
+                android:textColor="#64ff0000"
+                android:textSize="14sp" />
+            <!--todo заменить на customTextView-->
+            <TextView
+                android:id="@+id/collapsed_card_alert_textline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Узнать почему?"
+                android:textColor="#ff0000"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>

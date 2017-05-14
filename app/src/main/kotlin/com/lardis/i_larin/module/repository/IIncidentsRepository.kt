@@ -10,5 +10,7 @@ interface IIncidentsRepository {
     fun loadData()
     fun add(incidentAddModel: IncidentAddModel)
     fun rm()
+    fun selected(fBModel: FBModel)
     fun subcRep(): Observable<List<FBModel>>
+      fun subcRepSelected(): Observable<FBModel>
 }

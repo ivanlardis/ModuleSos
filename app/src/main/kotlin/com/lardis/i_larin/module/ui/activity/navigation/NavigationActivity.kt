@@ -36,7 +36,7 @@ import timber.log.Timber
 class NavigationActivity : MvpAppCompatActivity(), NavigationsView, TooggleView,NavigationView.OnNavigationItemSelectedListener {
 
     private var toggle: ActionBarDrawerToggle? = null
-    private val MENU_DIALOGS = 0
+    private val MENU_DIALOGS = 1
 
 
     val EMAIL = "EMAIL"

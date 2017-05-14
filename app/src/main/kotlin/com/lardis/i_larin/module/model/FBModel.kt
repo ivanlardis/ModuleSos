@@ -18,14 +18,20 @@ package com.lardis.i_larin.module.model
   var mapInfo: String = ""
   var latitude: Double? =null
   var longitude: Double?=null
+  var key: String?=null
+
+
+//   var list:ArrayList<Int>
+
   constructor()
   {
-
+//    list=ArrayList<Int>()
+//     list  .add(12)
+//     list  .add(65)
+//     list  .add(43)
+//     list  .add(11)
   }
 
-  constructor(name: String, idUser: String) {
-    this.name = name
-    this.idUser = idUser
-  }
+
 
 }
