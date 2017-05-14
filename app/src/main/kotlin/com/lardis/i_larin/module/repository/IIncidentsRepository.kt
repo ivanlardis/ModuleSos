@@ -11,6 +11,7 @@ interface IIncidentsRepository {
     fun add(incidentAddModel: IncidentAddModel)
     fun rm()
     fun selected(fBModel: FBModel)
+    fun completed(fBModel: FBModel)
     fun subcRep(): Observable<List<FBModel>>
       fun subcRepSelected(): Observable<FBModel>
 }

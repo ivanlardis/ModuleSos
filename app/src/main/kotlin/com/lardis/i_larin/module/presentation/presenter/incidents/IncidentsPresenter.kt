@@ -47,6 +47,11 @@ class IncidentsPresenter : MvpPresenter<IncidentsView>() {
 
     }
 
+    fun completed(fBModel: FBModel) {
+        dialogRepository.completed(fBModel)
+
+    }
+
     fun add(incidentAddModel: IncidentAddModel) {
         dialogRepository.add(incidentAddModel)
 

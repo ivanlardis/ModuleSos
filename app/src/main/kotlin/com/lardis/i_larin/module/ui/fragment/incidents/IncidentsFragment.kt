@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
@@ -20,6 +21,7 @@ import com.lardis.i_larin.module.presentation.presenter.setting.IncidentsPresent
 import com.lardis.i_larin.module.presentation.view.setting.IncidentsView
 import com.lardis.i_larin.module.ui.activity.intident.IntidentActivity
 import com.lardis.i_larin.module.ui.fragment.incidents.IncidentAddDialog
+import com.vk.sdk.VKSdk
 import kotlinx.android.synthetic.main.incidents_fragment.*
 
 
@@ -56,7 +58,6 @@ class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
         {
             groopAdapter = GroopAdapter()
 
-            linearLayoutManager.setReverseLayout(true)
             setLayoutManager(linearLayoutManager)
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.HORIZONTAL))
             setAdapter(groopAdapter)
@@ -74,15 +75,12 @@ class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
         configureRecyclerView()
 
         incidents_fragment_fabutton.setOnClickListener {
-
-            showIncidentAddDialog()
+            if (VKSdk.isLoggedIn()) {
+                showIncidentAddDialog()
+            }else             Toast.makeText(context, "Извините Нужно залогинеться через ВК чтоб работало",
+                                        Toast.LENGTH_SHORT).show()
         }
-//        incidents_fragment_button_rm.setOnClickListener {
-//            if (VKSdk.isLoggedIn())
-//                mIncidentsPresenter.rm()
-//            else Toast.makeText(context, "Извините Нужно залогинеться через ВК чтоб работало",
-//                    Toast.LENGTH_SHORT).show()
-//        }
+
         setTitleActionBar("Происшествия")
         mIncidentsPresenter.loadData()
     }

@@ -28,11 +28,12 @@ class IncidentsRepository : IIncidentsRepository {
         return behaviorSubject.asObservable()
 
     }
+
     private var behaviorSubjectSelected: BehaviorSubject<FBModel>
             = BehaviorSubject.create<FBModel>()
 
 
-    override fun subcRepSelected(): Observable<  FBModel > {
+    override fun subcRepSelected(): Observable<FBModel> {
 
         return behaviorSubjectSelected.asObservable()
 
@@ -87,17 +88,25 @@ class IncidentsRepository : IIncidentsRepository {
 
             override fun onDataChange(p0: DataSnapshot?) {
                 var push = reference.push()
-                myObject.key=push.key
+                myObject.key = push.key
                 push.setValue(myObject)
             }
         })
     }
 
-var selectedModel:FBModel?=null
-    override fun selected(fBModel:FBModel)
-    {
-        selectedModel=fBModel
+    var selectedModel: FBModel? = null
+    override fun selected(fBModel: FBModel) {
+        selectedModel = fBModel
         behaviorSubjectSelected.onNext(fBModel)
+
+
+
+    }
+
+    override fun completed(fBModel: FBModel) {
+        Timber.e("completed")
+        mFirebaseDatabase.getReference("Incidents").child(fBModel.key).child("compeleteTime").setValue(System.currentTimeMillis())
+
 
     }
 
@@ -112,7 +121,6 @@ var selectedModel:FBModel?=null
 //                    .map { it.response }
 
 
-
     fun showElement() {
         val reference = mFirebaseDatabase.getReference("Incidents")
         reference.addValueEventListener(object : ValueEventListener {
@@ -125,18 +133,25 @@ var selectedModel:FBModel?=null
 
                 p0?.children?.
                         forEach {
-                            it.key
                             var value = it.getValue(FBModel::class.java)
                             list.add(value)
+                            if(it.key.equals(selectedModel?.key)) {
+
+                                behaviorSubjectSelected.onNext(value)
+                            }
+
+
+
 
                         }
                 behaviorSubject.onNext(list)
 
 
-
-
             }
         })
     }
+
+
+
 
 }

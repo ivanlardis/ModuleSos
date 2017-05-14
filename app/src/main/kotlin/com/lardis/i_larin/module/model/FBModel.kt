@@ -11,6 +11,7 @@ package com.lardis.i_larin.module.model
   var photoUrl: String = ""
   var idUser: String = ""
   var createTime: Long = System.currentTimeMillis()
+  var compeleteTime: Long = -1L
 
   var intident: String = ""
   var car: String = ""
