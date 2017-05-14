@@ -28,7 +28,7 @@ class DialogsFragment : MvpAppCompatFragment(), DialogView {
     override fun showDialogs(dialogModels: List<DialogModel>) {
         with(groopAdapter)
         {
-            clearHeader()
+            clearAll()
             headerItems.addAll(dialogModels.map { DialogsItemView(it, onClickListener) })
             notifyDataSetChanged()
         }

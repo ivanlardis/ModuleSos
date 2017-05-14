@@ -6,21 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import java.util.*
 
-class GroopAdapter () : RecyclerView.Adapter<GroopAdapter.ViewHolder>() {
+class GroopAdapter() : RecyclerView.Adapter<GroopAdapter.ViewHolder>() {
 
     var adapterDataObserver: AdapterDataObserver
 
     var headerItems: ArrayList<ItemView<*>> = ArrayList()
 
-    fun clearHeader( )
-
-    {
+    fun clearAll() {
         headerItems.clear()
+        data.clear()
 
-
-
+        footerItems.clear()
 
     }
+
     var footerItems: ArrayList<ItemView<*>> = ArrayList()
 
     private var data: HashMap<GroupTitleItemView<*>, ItemAdapter> = HashMap()

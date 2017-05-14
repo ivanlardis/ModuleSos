@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lardis.i_larin.module.ui.widget.ui.MessageSendView
+    android:id="@+id/incidents_activity_add_coments_item_button"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp">
+
+
+</com.lardis.i_larin.module.ui.widget.ui.MessageSendView>

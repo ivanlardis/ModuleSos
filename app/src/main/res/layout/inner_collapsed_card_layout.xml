@@ -38,6 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Иван"
+
+            android:textColor="@color/colorPrimaryWhite"
             android:textSize="24sp" />
         <!--todo заменить на customTextView-->
         <TextView
@@ -45,6 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+
+            android:textColor="@color/colorPrimaryWhite"
             android:text="Ларин"
             android:textSize="20sp" />
     </LinearLayout>
@@ -86,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="Тел: 8212121211212 "
-                    android:textColor="@color/grey"
+                    android:textColor="@color/colorPrimaryWhite"
                     android:lines="1"
                     android:textSize="16sp" />
 
@@ -118,7 +122,7 @@
                     android:layout_weight="1"
                     android:text="Машина "
                     android:lines="1"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/colorPrimaryWhite"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -145,7 +149,7 @@
                     android:layout_gravity="center_vertical"
                     android:lines="1"
                     android:text="за 23 мин"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/colorPrimaryWhite"
                     android:textSize="16sp" />
             </LinearLayout>
 

@@ -7,6 +7,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.lardis.i_larin.module.model.FBModel
 import com.lardis.i_larin.module.prefs.Prefs
+import com.lardis.i_larin.module.ui.activity.intident.ModelComment
 import com.lardis.i_larin.module.ui.fragment.incidents.IncidentAddModel
 import com.vk.sdk.VKAccessToken
 import rx.Observable
@@ -15,6 +16,8 @@ import timber.log.Timber
 
 
 class IncidentsRepository : IIncidentsRepository {
+
+
     override fun loadData() {
     }
 
@@ -100,12 +103,25 @@ class IncidentsRepository : IIncidentsRepository {
         behaviorSubjectSelected.onNext(fBModel)
 
 
-
     }
 
     override fun completed(fBModel: FBModel) {
         Timber.e("completed")
-        mFirebaseDatabase.getReference("Incidents").child(fBModel.key).child("compeleteTime").setValue(System.currentTimeMillis())
+        mFirebaseDatabase.getReference("Incidents")
+                .child(fBModel.key)
+                .child("compeleteTime")
+                .setValue(System.currentTimeMillis())
+
+
+    }
+
+    override fun addComments(comments: String) {
+
+        mFirebaseDatabase.getReference("Incidents")
+                .child(selectedModel?.key)
+                .child("comments")
+                .push()
+                .setValue(ModelComment(Prefs.FIRST_NAME.string, comments, System.currentTimeMillis(),Prefs.PHOTO_URL.string))
 
 
     }
@@ -114,11 +130,6 @@ class IncidentsRepository : IIncidentsRepository {
         val reference = mFirebaseDatabase.getReference("Incidents")
         reference.removeValue({ databaseError, databaseReference -> {} })
     }
-
-
-//    fun getUsers(ids: Set<String>) =
-//            mVKApi.getUsers(ids.toString().replace("[", "").replace("]", ""), "photo_50", "5.64")
-//                    .map { it.response }
 
 
     fun showElement() {
@@ -135,13 +146,9 @@ class IncidentsRepository : IIncidentsRepository {
                         forEach {
                             var value = it.getValue(FBModel::class.java)
                             list.add(value)
-                            if(it.key.equals(selectedModel?.key)) {
-
+                            if (it.key.equals(selectedModel?.key)) {
                                 behaviorSubjectSelected.onNext(value)
                             }
-
-
-
 
                         }
                 behaviorSubject.onNext(list)
@@ -150,8 +157,5 @@ class IncidentsRepository : IIncidentsRepository {
             }
         })
     }
-
-
-
 
 }

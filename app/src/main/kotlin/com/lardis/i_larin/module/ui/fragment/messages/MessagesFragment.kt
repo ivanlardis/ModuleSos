@@ -27,7 +27,7 @@ class MessagesFragment : MvpAppCompatFragment(), DialogView {
 
         with(groopAdapter)
         {
-            clearHeader()
+            clearAll()
             headerItems.addAll(dialogModels.map { MessagesItemView(it) })
             notifyDataSetChanged()
         }

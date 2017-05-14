@@ -4,15 +4,17 @@
     <color name="sendMessage">#9f9a07</color>
 
 
-    <color name="colorPrimary">#313d53</color>
+    <color name="colorPrimary">#243045</color>
     <color name="colorPrimaryDark">#243045</color>
     <color name="colorAccent">#ab627d</color>
 
     <color name="green_light">#d9f8b5</color>
     <color name="green">#aed581</color>
     <color name="green_dark">#76b132</color>
+    <color name="green_dark_p">#76b132</color>
     <color name="yellow">#c8b157</color>
 
     <color name="grey">#333333</color>
     <color name="grey_light">#80333333</color>
+    <color name="colorPrimaryWhite">#ffffff</color>
 </resources>

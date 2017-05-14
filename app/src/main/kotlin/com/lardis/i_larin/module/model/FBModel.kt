@@ -1,5 +1,7 @@
 package com.lardis.i_larin.module.model
 
+import com.lardis.i_larin.module.ui.activity.intident.ModelComment
+
 /**
  * Created by black-sony on 06.05.17.
  */
@@ -21,6 +23,7 @@ package com.lardis.i_larin.module.model
   var longitude: Double?=null
   var key: String?=null
 
+  var comments:Map<String,ModelComment>?=null
 
 //   var list:ArrayList<Int>
 

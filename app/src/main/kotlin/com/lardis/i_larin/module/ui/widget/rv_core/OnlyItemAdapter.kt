@@ -1,6 +1,7 @@
 package com.example.black_sony.testrecyclerview.core
 
 import android.support.v7.widget.RecyclerView
+import timber.log.Timber
 import java.util.*
 
 
@@ -16,20 +17,27 @@ class OnlyItemAdapter : ItemAdapter {
 
 
     override fun getItem(position: Int): ItemView<*> {
+        Timber.e("position"+position)
+        Timber.e("headerItems.size"+headerItems.size)
+        Timber.e("data.size"+data.size)
+        Timber.e("footerItems"+footerItems.size)
+
         var itemPosition = position
         if (itemPosition < headerItems.size) {
             return headerItems[itemPosition]
         } else {
             itemPosition -= headerItems.size
         }
-
+        Timber.e(" data position"+itemPosition)
         if (itemPosition < data.size) {
             return data[itemPosition]
         } else {
             itemPosition -= data.size
         }
+        Timber.e("footerItems position"+itemPosition)
+        Timber.e("footerItems size"+footerItems.size)
 
-        return footerItems[position]
+        return footerItems[itemPosition]
     }
 
 

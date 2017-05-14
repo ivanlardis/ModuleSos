@@ -57,4 +57,8 @@ class IncidentsPresenter : MvpPresenter<IncidentsView>() {
 
     }
 
+    fun addComments(comments: String) {
+        dialogRepository.addComments(comments)
+    }
+
 }

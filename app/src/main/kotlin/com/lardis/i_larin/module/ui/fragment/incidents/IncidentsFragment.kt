@@ -31,7 +31,7 @@ class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
     override fun show(data: List<FBModel>) {
         with(groopAdapter)
         {
-            clearHeader()
+            clearAll()
             headerItems.addAll(data.map { IncidentsItemView(it, onClickListener) })
             notifyDataSetChanged()
         }

@@ -9,6 +9,8 @@ interface IIncidentsRepository {
 
     fun loadData()
     fun add(incidentAddModel: IncidentAddModel)
+    fun addComments(comments: String)
+
     fun rm()
     fun selected(fBModel: FBModel)
     fun completed(fBModel: FBModel)
