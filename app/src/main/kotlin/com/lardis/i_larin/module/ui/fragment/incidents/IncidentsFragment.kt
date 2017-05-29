@@ -75,10 +75,17 @@ class IncidentsFragment : MvpAppCompatFragment(), IncidentsView {
         configureRecyclerView()
 
         incidents_fragment_fabutton.setOnClickListener {
-            if (VKSdk.isLoggedIn()) {
-                showIncidentAddDialog()
-            }else             Toast.makeText(context, "Извините Нужно залогинеться через ВК чтоб работало",
-                                        Toast.LENGTH_SHORT).show()
+           if (VKSdk.isLoggedIn()) {
+               if (android.os.Build.VERSION.SDK_INT >= 23) {
+
+                   Toast.makeText(context, "Извините я забыл попросить permission для 6 " +
+                           "anrdoid (использование геолокации)и " +
+                           "не должен выс сюда пускать чтоб приложение не вылетело",
+                           Toast.LENGTH_LONG).show()
+               } else
+               showIncidentAddDialog()
+            } else Toast.makeText(context, "Извините Нужно залогинеться через ВК чтоб работало",
+                    Toast.LENGTH_SHORT).show()
         }
 
         setTitleActionBar("Происшествия")
